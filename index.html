@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استبيان رضا العملاء - مطاعم مارب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #7f3979;
+            --secondary-color: #f5eef5;
+            --accent-color: #5d2858;
+            --text-color: #333;
+            --light-color: #fff;
+            --border-color: #e0d0de;
+            --success-color: #4caf50;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --whatsapp-color: #25D366;
+        }
+        
+        body {
+            background-color: #faf5fa;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 5px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px 15px;
+            background-color: var(--light-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-top: 6px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            font-size: 34px;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .welcome-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            max-width: 100%;
+            line-height: 1.6;
+        }
+        
+        .survey-form {
+            background-color: var(--light-color);
+            border-radius: 12px;
+            padding: 20px 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .question-block {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .question-block:last-of-type {
+            border-bottom: none;
+        }
+        
+        .question-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .question-title i {
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+        
+        .question-text {
+            flex: 1;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .options-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .option-label {
+            width: 100%;
+        }
+        
+        .option-input {
+            display: none;
+        }
+        
+        .option-text {
+            display: block;
+            padding: 12px 5px;
+            background-color: var(--secondary-color);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 14px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .option-input:checked + .option-text {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(127, 57, 121, 0.2);
+        }
+        
+        .notes-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--border-color);
+        }
+        
+        .notes-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .notes-title i {
+            color: var(--primary-color);
+        }
+        
+        .notes-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+            transition: border-color 0.3s;
+            background-color: var(--secondary-color);
+        }
+        
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .notes-hint {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .whatsapp-info {
+            text-align: center;
+            background-color: #f0f9f0;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-right: 3px solid var(--whatsapp-color);
+            font-size: 14px;
+        }
+        
+        .whatsapp-info i {
+            color: var(--whatsapp-color);
+            margin-left: 6px;
+        }
+        
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--whatsapp-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1da851;
+            transform: translateY(-3px);
+        }
+        
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #777;
+            font-size: 12px;
+            background-color: var(--light-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer i {
+            color: var(--primary-color);
+            margin: 0 5px;
+        }
+        
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            padding: 30px 15px;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .thank-you-message i {
+            font-size: 50px;
+            color: var(--success-color);
+            margin-bottom: 15px;
+            animation: scaleCheck 0.6s ease-in-out;
+        }
+        
+        @keyframes scaleCheck {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .thank-you-title {
+            font-size: 22px;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+        }
+        
+        .thank-you-text {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background-color: var(--secondary-color);
+            border-radius: 3px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-size: 13px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+        
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--secondary-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 14px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .validation-error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+            padding: 8px;
+            background-color: #fff5f5;
+            border-radius: 5px;
+            border: 1px solid #ffcccc;
+        }
+        
+        .question-counter {
+            text-align: center;
+            font-size: 13px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="logo-text">مطاعم مارب</div>
+            </div>
+            <div class="subtitle">استبيان رضا العملاء</div>
+            <p class="welcome-text">
+                نرحب بآرائكم لتطوير خدماتنا. شكراً لوقتكم.
+            </p>
+        </div>
+        
+        <div class="progress-text">التقدم: <span id="progress-percent">0%</span></div>
+        <div class="question-counter">(<span id="answered-count">0</span> / 13) إجابة</div>
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+        </div>
+        
+        <form id="surveyForm" class="survey-form">
+            <!-- الأسئلة المختصرة -->
+            <div class="question-block">
+                <div class="question-title">
+                    <i class="fas fa-utensils"></i>
+                    <div class="question-text">
+                        <span>جودة الأكل</span>
+                        <span class="question-number">1</span>
+                    </div>
+                </div>
+                <div class="options-container">
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q1" value="ممتاز" required>
+                        <span class="option-text">ممتاز</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q1" value="جيد">
+                        <span class="option-text">جيد</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q1" value="مقبول">
+                        <span class="option-text">مقبول</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q1" value="ضعيف">
+                        <span class="option-text">غير راضي</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">
+                    <i class="fas fa-thermometer-half"></i>
+                    <div class="question-text">
+                        <span>حرارة الطعام</span>
+                        <span class="question-number">2</span>
+                    </div>
+                </div>
+                <div class="options-container">
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q2" value="ممتاز" required>
+                        <span class="option-text">ممتاز</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q2" value="جيد">
+                        <span class="option-text">جيد</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q2" value="مقبول">
+                        <span class="option-text">مقبول</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q2" value="ضعيف">
+                        <span class="option-text">غير راضي</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">
+                    <i class="fas fa-broom"></i>
+                    <div class="question-text">
+                        <span>النظافة </span>
+                        <span class="question-number">3</span>
+                    </div>
+                </div>
+                <div class="options-container">
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q3" value="ممتاز" required>
+                        <span class="option-text">ممتاز</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q3" value="جيد">
+                        <span class="option-text">جيد</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q3" value="مقبول">
+                        <span class="option-text">مقبول</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q3" value="ضعيف">
+                        <span class="option-text">غير راضي</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">
+                    <i class="fas fa-door-open"></i>
+                    <div class="question-text">
+                        <span>الاستقبال وتعامل الموضفين</span>
+                        <span class="question-number">4</span>
+                    </div>
+                </div>
+                <div class="options-container">
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q4" value="ممتاز" required>
+                        <span class="option-text">ممتاز</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q4" value="جيد">
+                        <span class="option-text">جيد</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q4" value="مقبول">
+                        <span class="option-text">مقبول</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q4" value="ضعيف">
+                        <span class="option-text">غير راضي</span>
+                    </label>
+                </div>
+            </div>
+            
+            
+            
+            <div class="question-block">
+                <div class="question-title">
+                    <i class="fas fa-concierge-bell"></i>
+                    <div class="question-text">
+                        <span>السرعة ومستوى الخدمة</span>
+                        <span class="question-number">6</span>
+                    </div>
+                </div>
+                <div class="options-container">
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q6" value="ممتاز" required>
+                        <span class="option-text">ممتاز</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q6" value="جيد">
+                        <span class="option-text">جيد</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q6" value="مقبول">
+                        <span class="option-text">مقبول</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q6" value="ضعيف">
+                        <span class="option-text">غير راضي</span>
+                    </label>
+                </div>
+            </div>
+            
+            
+            <div class="question-block">
+                <div class="question-title">
+                    <i class="fas fa-star"></i>
+                    <div class="question-text">
+                        <span>الرضا العام</span>
+                        <span class="question-number">12</span>
+                    </div>
+                </div>
+                <div class="options-container">
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q12" value="ممتاز" required>
+                        <span class="option-text">ممتاز</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q12" value="جيد">
+                        <span class="option-text">جيد</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q12" value="مقبول">
+                        <span class="option-text">مقبول</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q12" value="ضعيف">
+                        <span class="option-text">غير راضي</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- السؤال الأخير غير مختصر -->
+            <div class="question-block">
+                <div class="question-title">
+                    <i class="fas fa-heart"></i>
+                    <div class="question-text">
+                        <span>هل توصي أصدقائك أو عائلتك بزيارة المطعم؟</span>
+                        <span class="question-number">13</span>
+                    </div>
+                </div>
+                <div class="options-container">
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q13" value="نعم بالتأكيد" required>
+                        <span class="option-text">نعم بالتأكيد</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q13" value="ربما">
+                        <span class="option-text">ربما</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" class="option-input" name="q13" value="لا">
+                        <span class="option-text">لا</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- قسم الملاحظات -->
+            <div class="notes-section">
+                <div class="notes-title">
+                    <i class="fas fa-edit"></i>
+                    <span>ملاحظات (اختياري)</span>
+                </div>
+                <textarea 
+                    id="notes" 
+                    class="notes-textarea" 
+                    placeholder="ملاحظات إضافية..."
+                ></textarea>
+            </div>
+            
+            <div class="whatsapp-info">
+                <i class="fab fa-whatsapp"></i>
+                <span>عند النقر على زر الإرسال، سيتم فتح الواتساب مع رسالة جاهزة للإرسال إلى إدارة المطعم</span>
+            </div>
+            
+            <div class="validation-error" id="validation-error">
+                !يرجى الإجابة على جميع الأسئلة
+            </div>
+            
+            <div class="submit-btn-container">
+                <button type="button" id="sendWhatsAppBtn" class="submit-btn">
+                    <i class="fab fa-whatsapp"></i> إرسال الاستبيان  
+                </button>
+            </div>
+        </form>
+        
+        <div id="thankYouMessage" class="thank-you-message">
+            <i class="fas fa-check-circle"></i>
+            <h2 class="thank-you-title">تم فتح الواتساب!</h2>
+            <p class="thank-you-text">
+                تم فتح تطبيق الواتساب مع رسالة الاستبيان جاهزة. الرجاء الضغط على زر الإرسال في الواتساب لإرسالها إلى إدارة المطعم.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>
+                <i class="fas fa-utensils"></i>
+                مطاعم مارب
+                <i class="fas fa-utensils"></i>
+            </p>
+            <p style="margin-top: 8px;">© <span id="current-year">2023</span></p>
+        </div>
+        
+        <!-- شاشة التحميل -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <div class="loading-text">جاري فتح الواتساب...</div>
+        </div>
+    </div>
+
+    <script>
+        // تحديث السنة الحالية في الفوتر
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // متغيرات التتبع
+        let answeredQuestions = 0;
+        const totalQuestions = 13;
+        
+        // تحديث شريط التقدم وعداد الإجابات
+        function updateProgress() {
+            answeredQuestions = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedOption) {
+                    answeredQuestions++;
+                }
+            }
+            
+            const progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercentText = document.getElementById('progress-percent');
+            const answeredCountText = document.getElementById('answered-count');
+            
+            progressBar.style.width = progressPercent + '%';
+            progressPercentText.textContent = progressPercent + '%';
+            answeredCountText.textContent = answeredQuestions;
+            
+            // تحديث حالة زر الإرسال
+            const submitBtn = document.getElementById('sendWhatsAppBtn');
+            submitBtn.disabled = answeredQuestions !== totalQuestions;
+        }
+        
+        // إضافة مستمعي الأحداث لجميع خيارات الراديو
+        document.querySelectorAll('.option-input').forEach(input => {
+            input.addEventListener('change', updateProgress);
+        });
+        
+        // جمع نتائج الاستبيان
+        function gatherSurveyResults() {
+            const results = {
+                notes: document.getElementById('notes').value.trim()
+            };
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedOption) {
+                    results[questionName] = selectedOption.value;
+                }
+            }
+            
+            return results;
+        }
+        
+        // تنسيق النتائج كنص للواتساب
+        function formatResultsForWhatsApp(results) {
+            const questions = [
+                "١. جودة الأكل",
+                "٢. حرارة الطعام",
+                "٣. نظافة المطعم",
+                "٤. الاستقبال",
+                "٥. تعامل الموظفين",
+                "٦. مستوى الخدمة",
+                "٧. سرعة الخدمة",
+                "٨. دقة الطلب",
+                "٩. الأسعار مقابل الجودة",
+                "١٠. تنوع القائمة",
+                "١١. نظافة التعبئة",
+                "١٢. الرضا العام",
+                "١٣. هل توصي أصدقائك أو عائلتك بزيارة المطعم؟"
+            ];
+            
+            let message = "🌟 *استبيان رضا العملاء - مطاعم مارب* 🌟\n\n";
+            message += "النتائج:\n\n";
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                if (results[questionName]) {
+                    message += `${questions[i-1]}: *${results[questionName]}*\n`;
+                }
+            }
+            
+            if (results.notes) {
+                message += `\n📝 *ملاحظات إضافية*:\n${results.notes}\n`;
+            }
+            
+            message += "\n---\nتم إرسال هذا الاستبيان عبر الموقع الإلكتروني";
+            
+            return encodeURIComponent(message);
+        }
+        
+        // إظهار/إخفاء رسالة الخطأ
+        function showError(message) {
+            const errorElement = document.getElementById('validation-error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 3000);
+        }
+        
+        // إظهار شاشة التحميل
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+        
+        // إخفاء شاشة التحميل
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+        
+        // إرسال النتائج عبر الواتساب
+        function sendViaWhatsApp(results) {
+            const phoneNumber = "966590681513";
+            const message = formatResultsForWhatsApp(results);
+            
+            // رابط الواتساب
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            showLoading();
+            
+            setTimeout(() => {
+                hideLoading();
+                
+                // محاولة فتح الواتساب في نافذة جديدة
+                const newWindow = window.open(whatsappUrl, '_blank');
+                
+                // إذا تم حظر النافذة المنبثقة (مانع الإعلانات)
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    // طريقة بديلة: استخدام window.location
+                    window.location.href = whatsappUrl;
+                }
+                
+                // إظهار رسالة الشكر
+                document.getElementById('surveyForm').style.display = 'none';
+                document.getElementById('thankYouMessage').style.display = 'block';
+                document.getElementById('progress-bar').style.width = '100%';
+                document.getElementById('progress-percent').textContent = '100%';
+            }, 1000);
+        }
+        
+        // التعامل مع النقر على زر إرسال الواتساب
+        document.getElementById('sendWhatsAppBtn').addEventListener('click', function() {
+            if (answeredQuestions < totalQuestions) {
+                showError('!يرجى الإجابة على جميع الأسئلة');
+                return;
+            }
+            
+            const results = gatherSurveyResults();
+            sendViaWhatsApp(results);
+        });
+        
+        // تهيئة شريط التقدم عند التحميل
+        document.addEventListener('DOMContentLoaded', updateProgress);
+        
+        // تحسين تجربة اللمس على الجوال
+        document.querySelectorAll('.option-text').forEach(option => {
+            option.addEventListener('touchstart', function() {
+                this.style.opacity = '0.8';
+            });
+            
+            option.addEventListener('touchend', function() {
+                this.style.opacity = '1';
+            });
+        });
+    </script>
+</body>
+</html>
